@@ -1,1 +1,1 @@
-# this is 0x01. NoSQL project
+# this is repo for alx-backend-storage
