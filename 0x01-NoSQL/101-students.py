@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 """
 Module to provide the top students sorted by average score.
