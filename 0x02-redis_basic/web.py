@@ -68,3 +68,14 @@ def get_page(url: str) -> str:
     """
     response = requests.get(url)
     return response.text
+
+
+if __name__ == "__main__":
+    url = "http://slowwly.robertomurray.co.uk/delay/3000/url/http://google.com"
+    for _ in range(5):
+        start_time = time.time()
+        page = get_page(url)
+        end_time = time.time()
+        print(f"Time taken: {end_time - start_time:.2f} seconds")
+        print(f"Access count: {r.get(f'count:{url}').decode('utf-8')}")
+        print("---")
