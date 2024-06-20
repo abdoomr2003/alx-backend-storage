@@ -12,6 +12,7 @@ from typing import Callable
 # Initialize Redis client
 redis_client = redis.Redis()
 
+
 def cache_with_count(func: Callable) -> Callable:
     """
     Decorator to cache the result of a function and track access count.
@@ -70,10 +71,12 @@ def get_page(url: str) -> str:
     Returns:
         str: The HTML content of the URL.
     """
-    return url  # Placeholder return; actual fetching is handled by the decorator
+    return url
+
 
 if __name__ == "__main__":
-    test_url = 'http://slowwly.robertomurray.co.uk/delay/5000/url/https://slowwly.robertomurray.co.uk'
+    test_url = '''http://slowwly.robertomurray.co.uk/delay/5000/url/https
+    ://slowwly.robertomurray.co.uk'''
 
     print("Fetching URL for the first time:")
     print(get_page(test_url))
