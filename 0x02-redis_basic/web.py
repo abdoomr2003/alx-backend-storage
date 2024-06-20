@@ -84,3 +84,11 @@ def cache_with_count(func: Callable) -> Callable:
 
 # Apply the decorator to the get_page function
 get_page = cache_with_count(get_page)
+
+if __name__ == "__main__":
+    url = ('http://slowwly.robertomurray.co.uk/delay/5000/url/'
+           'https://www.example.com')
+    print("Fetching URL for the first time:")
+    print(get_page(url))
+    print("Fetching URL for the second time (should be cached):")
+    print(get_page(url))
