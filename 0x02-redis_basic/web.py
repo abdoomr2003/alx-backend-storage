@@ -11,7 +11,6 @@ from typing import Callable
 # Initialize Redis client
 redis_client = redis.Redis()
 
-
 def get_page(url: str) -> str:
     """
     Fetches the HTML content of a URL and caches it for 10 seconds.
@@ -32,15 +31,18 @@ def get_page(url: str) -> str:
     if cached_content:
         return cached_content.decode('utf-8')
 
-    # Fetch the HTML content from the URL
-    response = requests.get(url)
-    html_content = response.text
+    try:
+        # Fetch the HTML content from the URL
+        response = requests.get(url)
+        response.raise_for_status()
+        html_content = response.text
 
-    # Cache the HTML content with an expiration time of 10 seconds
-    redis_client.setex(url, 10, html_content)
+        # Cache the HTML content with an expiration time of 10 seconds
+        redis_client.setex(url, 10, html_content)
 
-    return html_content
-
+        return html_content
+    except requests.RequestException as e:
+        return f"An error occurred: {e}"
 
 def cache_with_count(func: Callable) -> Callable:
     """
@@ -81,14 +83,6 @@ def cache_with_count(func: Callable) -> Callable:
 
     return wrapper
 
-
 # Apply the decorator to the get_page function
 get_page = cache_with_count(get_page)
 
-if __name__ == "__main__":
-    url = ('http://slowwly.robertomurray.co.uk/delay/5000/url/'
-           'https://www.example.com')
-    print("Fetching URL for the first time:")
-    print(get_page(url))
-    print("Fetching URL for the second time (should be cached):")
-    print(get_page(url))
