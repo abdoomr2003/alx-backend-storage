@@ -72,13 +72,3 @@ def get_page(url: str) -> str:
         str: The HTML content of the URL.
     """
     return url
-
-
-if __name__ == "__main__":
-    test_url = 'https://www.atom.com/name/robertomurray.co.uk'
-
-    print("Fetching URL for the first time:")
-    print(get_page(test_url))
-
-    print("Fetching URL for the second time (should be cached):")
-    print(get_page(test_url))
