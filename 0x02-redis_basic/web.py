@@ -75,8 +75,7 @@ def get_page(url: str) -> str:
 
 
 if __name__ == "__main__":
-    test_url = '''http://slowwly.robertomurray.co.uk/delay/5000/url/https
-    ://slowwly.robertomurray.co.uk'''
+    test_url = 'https://www.atom.com/name/robertomurray.co.uk'
 
     print("Fetching URL for the first time:")
     print(get_page(test_url))
